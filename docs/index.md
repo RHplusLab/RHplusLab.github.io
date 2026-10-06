@@ -6,7 +6,7 @@ hide:
 
 # Roboin Humanoid Plus Project
 
-22축 휴머노이드와 7축 로봇팔을 ROS2로 제어합니다.
+22-DoF Humanoid and 7-DoF Manipulator, controlled with ROS2
 
 ![RH+ 휴머노이드](images/humanoid_home-web.jpg){ .hero }
 
