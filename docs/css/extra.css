@@ -1,0 +1,18 @@
+/* 홈 대문 사진 */
+.md-typeset img.hero {
+  display: block;
+  margin: 1.6rem auto 2rem;
+  max-width: min(100%, 720px);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, .18);
+}
+
+/* 홈 상단 중앙 정렬: 제목 / 한 줄 설명 / 버튼 */
+.md-typeset h1 + p,
+.md-typeset h1 {
+  text-align: center;
+}
+.md-typeset h1 + p + p .md-button,
+.md-typeset p:has(> .md-button) {
+  text-align: center;
+}

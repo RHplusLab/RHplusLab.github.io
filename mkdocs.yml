@@ -1,0 +1,103 @@
+site_name: RH+ Humanoid Project
+site_description: Roboin Humanoid Plus Project — ROS2 휴머노이드 제어 구축 가이드
+site_url: https://rhpluslab.github.io/
+repo_url: https://github.com/RHplusLab
+repo_name: RHplusLab
+copyright: © 2025–2026 Roboin Humanoid Plus (RH+) Project
+
+theme:
+  name: material
+  language: ko
+  features:
+    - navigation.sections      # 좌측 트리를 섹션으로 묶어서 표시
+    - navigation.tabs          # 상단 탭
+    - navigation.top           # 맨 위로 버튼
+    - navigation.indexes       # 섹션 자체에 index 페이지 연결
+    - toc.follow               # 우측 목차가 스크롤 따라감
+    - search.highlight
+    - search.suggest
+    - content.code.copy        # 코드블록 복사 버튼
+    - content.code.annotate
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: 다크 모드로
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: 라이트 모드로
+  icon:
+    repo: fontawesome/brands/github
+
+markdown_extensions:
+  - admonition                 # 참고/경고 박스
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.details
+  - pymdownx.superfences       # 중첩 코드블록
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.arithmatex:       # 수식 (ZMP 등)
+      generic: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+extra_css:
+  - css/extra.css
+
+extra_javascript:
+  - js/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - 홈: index.md
+  - Installation:
+      - install/index.md
+      - Ubuntu 24.04 + ROS2: install/ros2.md
+      - 워크스페이스 · bashrc: install/workspace.md
+  - Hardware Interface:
+      - hw/index.md
+      - humanoid_description: hw/description.md
+      - rhpHumanoid HW Interface: hw/interface.md
+      - Robotis-OP3 코드 분석: hw/op3.md
+  - 경기장 셋업: arena.md
+  - High Level Control:
+      - vision/index.md
+      - 카메라 · 6D Pose: vision/pose.md
+      - AprilTag 연동: vision/apriltag.md
+  - Walking Pattern:
+      - walk/index.md
+      - ZMP 기반 보행: walk/zmp.md
+      - 참고 논문·자료: walk/refs.md
+  - RL Control: rl.md
+  - Task Generation:
+      - task/index.md
+      - MoveIt2 기초: task/moveit2.md
+      - MoveIt Task Constructor: task/mtc.md
+      - Pick & Place (로봇팔): task/pick-place.md
+      - 미션 시나리오: task/missions.md
+  - 학습 경로:
+      - study/index.md
+      - 제어 이론 커리큘럼: study/curriculum.md
+      - 트러블슈팅 모음: study/troubleshooting.md
