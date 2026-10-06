@@ -46,7 +46,7 @@ hide:
 | 인식 | AprilTag, 6D Pose Estimation, Point Cloud |
 | 보행 | ZMP 기반 보행 패턴 생성 |
 
-## 문서
+## Documentation
 
 <div class="grid cards" markdown>
 
@@ -58,7 +58,7 @@ hide:
 
     URDF description 패키지와 `ros2_control` 하드웨어 인터페이스
 
--   **3 ·** [경기장 셋업](arena.md)
+-   **3 ·** [Arena Setup](arena.md)
 
     1.5 m × 3 m 경기장과 미션 구성
 
@@ -78,7 +78,7 @@ hide:
 
     MoveIt2 · MTC로 작업 시퀀스 구성
 
--   :material-school: [학습 경로](study/index.md)
+-   :material-school: [Learning Path](study/index.md)
 
     제어 이론 커리큘럼과 트러블슈팅 모음
 

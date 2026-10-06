@@ -71,33 +71,33 @@ extra_javascript:
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 
 nav:
-  - 홈: index.md
+  - Home: index.md
   - Installation:
       - install/index.md
       - Ubuntu 24.04 + ROS2: install/ros2.md
-      - 워크스페이스 · bashrc: install/workspace.md
+      - Workspace & bashrc: install/workspace.md
   - Hardware Interface:
       - hw/index.md
       - humanoid_description: hw/description.md
       - rhpHumanoid HW Interface: hw/interface.md
-      - Robotis-OP3 코드 분석: hw/op3.md
-  - 경기장 셋업: arena.md
+      - Robotis-OP3 Code Analysis: hw/op3.md
+  - Arena Setup: arena.md
   - High Level Control:
       - vision/index.md
-      - 카메라 · 6D Pose: vision/pose.md
-      - AprilTag 연동: vision/apriltag.md
+      - Camera & 6D Pose: vision/pose.md
+      - AprilTag Integration: vision/apriltag.md
   - Walking Pattern:
       - walk/index.md
-      - ZMP 기반 보행: walk/zmp.md
-      - 참고 논문·자료: walk/refs.md
+      - ZMP-based Walking: walk/zmp.md
+      - References: walk/refs.md
   - RL Control: rl.md
   - Task Generation:
       - task/index.md
-      - MoveIt2 기초: task/moveit2.md
+      - MoveIt2 Basics: task/moveit2.md
       - MoveIt Task Constructor: task/mtc.md
-      - Pick & Place (로봇팔): task/pick-place.md
-      - 미션 시나리오: task/missions.md
-  - 학습 경로:
+      - Pick & Place (Manipulator): task/pick-place.md
+      - Mission Scenarios: task/missions.md
+  - Learning Path:
       - study/index.md
-      - 제어 이론 커리큘럼: study/curriculum.md
-      - 트러블슈팅 모음: study/troubleshooting.md
+      - Control Theory Curriculum: study/curriculum.md
+      - Troubleshooting: study/troubleshooting.md
