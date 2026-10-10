@@ -23,9 +23,9 @@
 
     ---
 
-    - **원격 조종** — 키보드 입력 + 카메라 영상 스트리밍
-    - **Pick & Place** — 바닥의 공을 검출해 지정 위치로 (실패 시 재시도)
-    - **블럭 쌓기** — AprilTag로 순서를 읽어 프로그래밍된 대로 적재
+    - **작업 계획** — MoveIt2 + MoveIt Task Constructor로 집기 · 옮기기 · 놓기를 단계별 계획
+    - **Pick & Place** — 좌표를 받아 실린더를 집어 지정 위치에 놓기
+    - **블럭 쌓기** — 카메라로 AprilTag 실린더 3개를 찾아 3층으로 적층
 
 </div>
 
@@ -54,7 +54,7 @@
 
 -   **3 ·** [Arena Setup](arena.md)
 
-    1.5 m × 3 m 경기장과 미션 구성
+    2 m × 3 m 경기장과 미션 구성
 
 -   **4 ·** [High Level Control](vision/index.md)
 
@@ -70,7 +70,11 @@
 
 -   **7 ·** [Task Generation](task/index.md)
 
-    MoveIt2 · MTC로 작업 시퀀스 구성
+    보행 · 미션 동작을 엮어 경기장 미션 수행
+
+-   :material-robot-outline: [7-DoF Manipulator](arm/index.md)
+
+    MoveIt2 · MTC로 AprilTag 실린더 Pick & Place
 
 -   :material-school: [Learning Path](study/index.md)
 

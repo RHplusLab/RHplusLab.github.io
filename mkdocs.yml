@@ -80,18 +80,18 @@ nav:
   - High Level Control:
       - Overview: vision/index.md
       - Camera & 6D Pose: vision/pose.md
-      - AprilTag Integration: vision/apriltag.md
   - Walking Pattern:
       - Overview: walk/index.md
       - ZMP-Based Walking: walk/zmp.md
       - References: walk/refs.md
   - RL Control: rl.md
-  - Task Generation:
-      - Overview: task/index.md
-      - MoveIt2 Basics: task/moveit2.md
-      - MoveIt Task Constructor: task/mtc.md
-      - Pick & Place: task/pick-place.md
-      - Mission Scenarios: task/missions.md
+  - Task Generation: task/index.md
+  - 7-DoF Manipulator:
+      - Overview: arm/index.md
+      - MoveIt2 Basics: arm/moveit2.md
+      - MoveIt Task Constructor: arm/mtc.md
+      - Pick & Place: arm/pick-place.md
+      - AprilTag Integration: arm/apriltag.md
   - Learning Path:
       - Overview: study/index.md
       - Control Theory Curriculum: study/curriculum.md
