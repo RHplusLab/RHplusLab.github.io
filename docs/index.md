@@ -1,9 +1,3 @@
----
-hide:
-  - navigation
-  - toc
----
-
 # Roboin Humanoid Plus Project
 
 22-DoF Humanoid and 7-DoF Manipulator, controlled with ROS2
@@ -72,7 +66,7 @@ hide:
 
 -   **6 ·** [RL Control](rl.md)
 
-    강화학습을 검토하고 보류한 이유
+    강화학습 기반 제어
 
 -   **7 ·** [Task Generation](task/index.md)
 

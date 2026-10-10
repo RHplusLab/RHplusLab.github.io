@@ -1,3 +1,8 @@
+/* 본문 글꼴: Pretendard (코드는 Material 기본 Roboto Mono 유지) */
+:root {
+  --md-text-font: "Pretendard";
+}
+
 /* 홈 대문 사진 */
 .md-typeset img.hero {
   display: block;
@@ -8,11 +13,216 @@
 }
 
 /* 홈 상단 중앙 정렬: 제목 / 한 줄 설명 / 버튼 */
-.md-typeset h1 + p,
-.md-typeset h1 {
+/* 홈(대문 사진이 있는 페이지)에만 적용 */
+.md-typeset:has(img.hero) h1 + p,
+.md-typeset:has(img.hero) h1 {
   text-align: center;
 }
-.md-typeset h1 + p + p .md-button,
-.md-typeset p:has(> .md-button) {
+.md-typeset:has(img.hero) p:has(> .md-button) {
   text-align: center;
+}
+
+/* ── 왼쪽 메뉴: ROS2 문서(Read the Docs) 스타일 ─────────────── */
+:root {
+  --nav-plus: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.5 1h13a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 .5-.5zM2 2v12h12V2zm5.4 2.5h1.2v2.9h2.9v1.2H8.6v2.9H7.4V8.6H4.5V7.4h2.9z'/%3E%3C/svg%3E");
+  --nav-minus: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.5 1h13a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 .5-.5zM2 2v12h12V2zm2.5 5.4h7v1.2h-7z'/%3E%3C/svg%3E");
+}
+
+@media screen and (min-width: 76.25em) {
+  /* 사이드바: 어두운 배경 */
+  .md-sidebar--primary,
+  .md-sidebar--primary .md-sidebar__scrollwrap,
+  .md-sidebar--primary .md-sidebar__inner,
+  .md-nav--primary {
+    background: #343131;
+  }
+  .md-sidebar--primary .md-sidebar__scrollwrap {
+    margin: 0;
+  }
+  /* 사이드바 위 사이트 제목 박스 숨김 */
+  .md-nav--primary > .md-nav__title {
+    display: none;
+  }
+  /* Material 기본 파란 세로줄 제거 */
+  [dir=ltr] .md-nav--integrated > .md-nav__list > .md-nav__item--active .md-nav--secondary {
+    border-left: none;
+    margin: 0;
+  }
+  /* 회색 띠가 사이드바 폭을 꽉 채우도록 */
+  .md-sidebar--primary .md-sidebar__inner,
+  .md-nav--primary > .md-nav__list {
+    margin: 0;
+    padding: 0;
+  }
+  .md-nav--primary .md-nav__list {
+    padding: 0;
+  }
+  .md-nav--primary .md-nav__item {
+    padding: 0;
+  }
+  .md-nav--primary .md-nav__link {
+    margin: 0;
+    padding: .38rem .6rem;
+    color: #d9d9d9;
+    font-size: .7rem;
+  }
+  .md-nav--primary .md-nav__link:hover {
+    background: #4e4a4a;
+    color: #fff;
+  }
+
+  /* Home 아래에는 페이지 목차를 표시하지 않음 */
+  .md-nav--primary > .md-nav__list > .md-nav__item:first-child > .md-nav--secondary {
+    display: none;
+  }
+
+  /* Material 기본 목록 들여쓰기 제거 → 링크 padding으로만 들여쓰기 */
+  [dir=ltr] .md-nav--primary .md-nav__list,
+  [dir=ltr] .md-nav--primary .md-nav--secondary .md-nav__list {
+    padding-left: 0;
+    padding-bottom: 0;
+  }
+  [dir=ltr] .md-nav--primary .md-nav__item > .md-nav__link,
+  [dir=ltr] .md-nav--primary .md-nav--secondary .md-nav__item > .md-nav__link {
+    margin-right: 0;
+  }
+
+  /* 단계별 들여쓰기 */
+  .md-nav--primary .md-nav[data-md-level="1"] .md-nav__link   { padding-left: 2.4rem; }
+  .md-nav--primary .md-nav--secondary .md-nav__link            { padding-left: 3.2rem; }
+  .md-nav--primary .md-nav--secondary .md-nav .md-nav__link    { padding-left: 4rem; }
+  .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav--secondary .md-nav__link          { padding-left: 2.4rem; }
+  .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav--secondary .md-nav .md-nav__link  { padding-left: 3.2rem; }
+  .md-nav--primary .md-nav--secondary > .md-nav__title { display: none; }
+
+  /* 펼쳐진 현재 섹션: 1단계 흰 줄, 하위 회색 띠 (깊을수록 진하게) */
+  .md-nav--primary > .md-nav__list > .md-nav__item--active > .md-nav__link {
+    background: #fcfcfc;
+    color: #404040;
+    font-weight: 700;
+    border-top: 1px solid #c9c9c9;
+    border-bottom: 1px solid #c9c9c9;
+  }
+  .md-nav--primary > .md-nav__list > .md-nav__item--active > .md-nav {
+    background: #e3e3e3;
+  }
+  .md-nav--primary > .md-nav__list > .md-nav__item--active > .md-nav .md-nav__link {
+    color: #404040;
+  }
+  .md-nav--primary > .md-nav__list > .md-nav__item--active > .md-nav .md-nav__link:hover {
+    background: #d6d6d6;
+    color: #404040;
+  }
+  /* 현재 페이지 (섹션 안) */
+  .md-nav--primary .md-nav[data-md-level="1"] .md-nav__item--active > a.md-nav__link--active {
+    background: #c9c9c9;
+    font-weight: 700;
+  }
+  .md-nav--primary .md-nav[data-md-level="1"] .md-nav__item--active > .md-nav--secondary {
+    background: #c9c9c9;
+  }
+  .md-nav--primary .md-nav[data-md-level="1"] .md-nav--secondary .md-nav {
+    background: #bdbdbd;
+  }
+  /* 페이지 목차 글씨 */
+  .md-nav--primary .md-nav--secondary .md-nav__link {
+    font-size: .64rem;
+  }
+  .md-nav--primary .md-nav--secondary .md-nav__link--active {
+    font-weight: 700;
+    color: #2980b9 !important;
+  }
+
+  /* +/- 아이콘 (왼쪽) */
+  .md-nav--primary .md-nav__link .md-nav__icon {
+    order: -1;
+    width: .65rem;
+    height: .65rem;
+    margin: 0 .35rem 0 -.95rem;
+    flex-shrink: 0;
+  }
+  .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link .md-nav__icon {
+    margin-left: 0;
+  }
+  .md-nav--primary .md-nav__link .md-nav__icon::after {
+    width: 100%;
+    height: 100%;
+    -webkit-mask-image: var(--nav-plus);
+            mask-image: var(--nav-plus);
+    -webkit-mask-size: contain;
+            mask-size: contain;
+    transform: none !important;
+  }
+  .md-nav--primary .md-nav__toggle:checked ~ .md-nav__link .md-nav__icon::after {
+    -webkit-mask-image: var(--nav-minus);
+            mask-image: var(--nav-minus);
+  }
+  /* 아이콘 없는 1단계 항목도 글자 위치 맞춤 */
+  .md-nav--primary > .md-nav__list > .md-nav__item:not(.md-nav__item--nested) > .md-nav__link {
+    padding-left: 2rem;
+  }
+
+  /* 페이지 목차 +/- (nav-toggle.js) */
+  .toc-toggle {
+    display: inline-block;
+    flex-shrink: 0;
+    width: .6rem;
+    height: .6rem;
+    margin: 0 -.1rem 0 -.9rem;   /* 오른쪽 -.1 = .3 - 링크 gap(.4) */
+    background-color: currentColor;
+    -webkit-mask: var(--nav-plus) center / contain no-repeat;
+            mask: var(--nav-plus) center / contain no-repeat;
+    cursor: pointer;
+  }
+  .toc-open > .md-nav__link > .toc-toggle {
+    -webkit-mask-image: var(--nav-minus);
+            mask-image: var(--nav-minus);
+  }
+  .toc-collapsible:not(.toc-open) > .md-nav {
+    display: none;
+  }
+}
+
+/* ── 본문 사진 배치 ─────────────────────────────────────── */
+.md-typeset figure { margin: 0; }
+.md-typeset figure img { height: auto; }
+.md-typeset figure > br { display: none; }   /* 이미지와 캡션 사이에 생기는 빈 줄 제거 */
+.md-typeset figure img { border-radius: 6px; }
+.md-typeset figcaption {
+  margin: .4rem 0 0;
+  font-size: .64rem;
+  color: var(--md-default-fg-color--light);
+  max-width: none;
+  font-style: normal;
+}
+
+/* 구조도 + 로봇 사진 나란히 */
+.hw-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+}
+.hw-hero figure { align-self: center; }
+.hw-hero figure img { max-height: 22rem; width: auto; flex: none; }
+
+/* 사진 3장 한 줄 */
+.photo-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .8rem;
+  margin: 1rem 0;
+}
+.photo-row figure img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+/* 마지막 사진이 세로(3:4)인 줄: 칸 너비를 비율대로 줘서 세 장 높이를 맞춤 (4/3 : 4/3 : 3/4) */
+.photo-row--portrait-last { grid-template-columns: 4fr 4fr 2.25fr; }
+.photo-row img.portrait { aspect-ratio: 3 / 4; }
+
+@media screen and (max-width: 44.9375em) {
+  .hw-hero, .photo-row { grid-template-columns: 1fr; }
 }

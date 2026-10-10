@@ -9,30 +9,19 @@ theme:
   name: material
   language: ko
   features:
-    - navigation.sections      # 좌측 트리를 섹션으로 묶어서 표시
-    - navigation.tabs          # 상단 탭
+    - navigation.path          # 상단 경로 표시 (Installation / ...)
+    - navigation.footer        # 하단 Previous / Next
     - navigation.top           # 맨 위로 버튼
-    - navigation.indexes       # 섹션 자체에 index 페이지 연결
-    - toc.follow               # 우측 목차가 스크롤 따라감
+    - toc.integrate            # 페이지 목차를 왼쪽 메뉴에 통합 (navigation.indexes와 함께 쓸 수 없음)
+    - toc.follow               # 목차가 스크롤 따라감
     - search.highlight
     - search.suggest
     - content.code.copy        # 코드블록 복사 버튼
     - content.code.annotate
   palette:
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/weather-night
-        name: 다크 모드로
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/weather-sunny
-        name: 라이트 모드로
+    scheme: default
+    primary: indigo
+    accent: indigo
   icon:
     repo: fontawesome/brands/github
 
@@ -63,41 +52,47 @@ markdown_extensions:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
+plugins:
+  - search
+  - glightbox            # 사진 클릭 시 크게 보기
+
 extra_css:
+  - https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css
   - css/extra.css
 
 extra_javascript:
+  - js/nav-toggle.js
   - js/mathjax.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 
 nav:
   - Home: index.md
   - Installation:
-      - install/index.md
-      - Ubuntu 24.04 + ROS2: install/ros2.md
-      - Workspace & bashrc: install/workspace.md
+      - Overview: install/index.md
+      - Ubuntu & ROS2: install/ros2.md
+      - Workspace Setup: install/workspace.md
   - Hardware Interface:
-      - hw/index.md
-      - humanoid_description: hw/description.md
-      - rhpHumanoid HW Interface: hw/interface.md
-      - Robotis-OP3 Code Analysis: hw/op3.md
+      - Overview: hw/index.md
+      - Robot Description: hw/description.md
+      - Hardware Plugin: hw/interface.md
+      - OP3 Reference: hw/op3.md
   - Arena Setup: arena.md
   - High Level Control:
-      - vision/index.md
+      - Overview: vision/index.md
       - Camera & 6D Pose: vision/pose.md
       - AprilTag Integration: vision/apriltag.md
   - Walking Pattern:
-      - walk/index.md
-      - ZMP-based Walking: walk/zmp.md
+      - Overview: walk/index.md
+      - ZMP-Based Walking: walk/zmp.md
       - References: walk/refs.md
   - RL Control: rl.md
   - Task Generation:
-      - task/index.md
+      - Overview: task/index.md
       - MoveIt2 Basics: task/moveit2.md
       - MoveIt Task Constructor: task/mtc.md
-      - Pick & Place (Manipulator): task/pick-place.md
+      - Pick & Place: task/pick-place.md
       - Mission Scenarios: task/missions.md
   - Learning Path:
-      - study/index.md
+      - Overview: study/index.md
       - Control Theory Curriculum: study/curriculum.md
       - Troubleshooting: study/troubleshooting.md
