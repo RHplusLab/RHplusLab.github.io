@@ -86,7 +86,7 @@ nav:
       - Camera & 6D Pose: vision/pose.md
   - Walking Pattern:
       - Overview: walk/index.md
-      - ZMP-Based Walking: walk/zmp.md
+      - Sine-Based Walking: walk/sine.md
       - References: walk/refs.md
   - RL Control: rl.md
   - Task Generation: task/index.md

@@ -62,7 +62,7 @@
 
 -   **5 ·** [Walking Pattern](walk/index.md)
 
-    ZMP 기반 보행 패턴 생성
+    사인파 기반 보행 패턴 생성 (OP3 알고리즘 이식)
 
 -   **6 ·** [RL Control](rl.md)
 
