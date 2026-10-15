@@ -33,12 +33,12 @@
 
 | 영역 | 사용 기술 |
 |---|---|
-| OS / 미들웨어 | Ubuntu 24.04, ROS2 |
+| OS / 미들웨어 | Ubuntu 22.04, ROS 2 Humble, CycloneDDS |
 | 제어 | `ros2_control`, custom `hardware_interface`, MoveIt2 |
 | 작업 계획 | MoveIt Task Constructor (MTC) |
 | 시뮬레이션 | Gazebo, RViz |
 | 인식 | AprilTag, 6D Pose Estimation, Point Cloud |
-| 보행 | ZMP 기반 보행 패턴 생성 |
+| 보행 | 사인파 기반 보행 패턴 (OP3 알고리즘 이식) |
 
 ## Documentation
 
@@ -46,7 +46,7 @@
 
 -   **1 ·** [Installation](install/index.md)
 
-    Ubuntu 24.04 + ROS2 설치, 워크스페이스 구성
+    Ubuntu 22.04 + ROS 2 Humble 설치, 워크스페이스 구성
 
 -   **2 ·** [Hardware Interface](hw/index.md)
 

@@ -49,7 +49,7 @@ serial_servo_bus.cpp       Hiwonder 버스 서보 프로토콜
 
 3. 22축 매핑 추가 → 이름 일괄 변경 `two` → `humanoid` (대소문자 · 파일명 · 폴더명 포함)
 
-## 2. 시리얼 포트
+## 2. 시리얼 포트 { #serial-port }
 
 ### CH340 드라이버 (Jetson)
 
@@ -189,7 +189,7 @@ readJointPositions(local_pos_map);
 - **서보 전압 제한**: 기본 최대 12 V → Hiwonder 설정 프로그램(Windows)에서 **10~14 V**로 변경
 - **개별 구동 테스트**: 같은 프로그램으로 1~22번을 하나씩 돌려 배선 · ID 문제를 코드 문제와 분리
 
-## 6. 머리 서보 (PWM)
+## 6. 머리 서보 (PWM) { #head-pwm }
 
 - 플러그인: `PWMHeadSystemHardware` (몸체와 별도)
 - 방식: Jetson sysfs PWM `/sys/class/pwm/pwmchipN/pwm0`, 주기 20 ms
@@ -283,7 +283,7 @@ client_ptr_->async_send_goal(goal);
     `joint_names`가 비었거나 컨트롤러에 없는 이름일 때 발생.
     관절은 순서가 아닌 **이름**으로 지정한다.
 
-## 트러블슈팅
+## 트러블슈팅 { #troubleshooting }
 
 | 증상 | 원인 | 해결 |
 |---|---|---|
