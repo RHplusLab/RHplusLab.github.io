@@ -121,7 +121,7 @@ launch 인자 `ros2_control_hardware_type:=real` 하나로 시뮬레이션과 �
 position = sqrt(B*B - pow(A*cos(angle) - C, 2)) + A*sin(angle) - sqrt(B*B - pow(A - C, 2)) + D;
 ```
 
-!!! warning "`close`를 그대로 쓰지 않는다"
+!!! warning "`close` 그대로 사용 금지"
     `close`(0.00 m)는 물체를 끝까지 조여 그리퍼가 상한다. 물체 지름에 맞춘 값을 직접 준다.
 
     ```cpp

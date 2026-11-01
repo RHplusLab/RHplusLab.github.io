@@ -13,7 +13,7 @@
 | 개발 PC | x86_64 노트북 · 데스크톱 (Windows 듀얼 부팅) | Ubuntu 22.04 | Humble |
 | 시뮬레이션 | 개발 PC | — | Gazebo (`ros_gz`) + `gz_ros2_control` |
 
-!!! warning "PC와 로봇의 ROS 2 배포판을 맞춘다"
+!!! warning "PC · 로봇 ROS 2 배포판 통일"
     - 같은 네트워크에서 노드끼리 통신하려면 배포판을 통일한다. 로봇이 Humble이므로 PC도 Humble.
     - Jazzy용 코드는 Humble에서 빌드되지 않는 경우가 있다 (예: `hardware_interface`의 `on_init` 시그니처 → [Hardware Plugin › 트러블슈팅](../hw/interface.md#troubleshooting))
     - Ubuntu 24.04 + Jazzy도 같은 절차 — 명령의 `humble`을 `jazzy`로 바꾼다 (7축 로봇팔 초기 환경)

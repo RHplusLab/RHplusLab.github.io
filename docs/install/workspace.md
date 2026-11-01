@@ -101,7 +101,7 @@ alias testpub='ros2 run demo_nodes_cpp talker'
 alias testsub='ros2 run demo_nodes_cpp listener'
 ```
 
-!!! warning "`ROS_DOMAIN_ID`는 로봇과 PC가 같아야 한다"
+!!! warning "로봇 · PC `ROS_DOMAIN_ID` 일치"
     - 값이 다르면 서로의 토픽이 보이지 않는다. 같은 공간의 다른 팀과는 다른 값을 쓴다.
     - `RMW_IMPLEMENTATION`도 양쪽을 같게 둔다.
 

@@ -30,7 +30,7 @@ serial_servo_bus.cpp       Hiwonder 버스 서보 프로토콜
 | `pwm_head_system.cpp` · `pwm_driver.cpp` | 머리 SG-90 플러그인 | — |
 | `rhphumanoid_hardware.xml` | pluginlib 등록 (플러그인 2개) | — |
 
-!!! note "write()는 바로 보내지 않는다"
+!!! note "write()는 저장만, 전송은 별도 스레드"
     `write()`는 명령을 공유 맵에 저장만 한다. 시리얼 전송은 `rhphumanoid::Process()` 스레드가 자기 주기로 처리한다.
     → 시리얼 지연이 제어 루프를 막지 않음.
 

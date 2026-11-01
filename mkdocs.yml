@@ -83,7 +83,8 @@ nav:
   - Arena Setup: arena.md
   - High Level Control:
       - Overview: vision/index.md
-      - Camera & 6D Pose: vision/pose.md
+      - Camera Setup: vision/camera.md
+      - Object Detection: vision/detection.md
   - Walking Pattern:
       - Overview: walk/index.md
       - Sine-Based Walking: walk/sine.md
