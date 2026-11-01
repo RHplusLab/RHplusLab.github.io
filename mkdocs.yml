@@ -89,7 +89,7 @@ nav:
       - Overview: walk/index.md
       - Sine-Based Walking: walk/sine.md
       - References: walk/refs.md
-  - RL Control: rl.md
+  - RL Control (준비 중): rl.md
   - Task Generation: task/index.md
   - 7-DoF Manipulator:
       - Overview: arm/index.md
@@ -97,6 +97,6 @@ nav:
       - MoveIt Task Constructor: arm/mtc.md
       - Pick & Place: arm/pick-place.md
       - AprilTag Integration: arm/apriltag.md
-  - Learning Path:
+  - Learning Path (준비 중):
       - Overview: study/index.md
       - Control Theory Curriculum: study/curriculum.md

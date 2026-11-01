@@ -8,7 +8,7 @@
 
 <figure markdown="span">
   ![경기장 3D 모델](images/arena/arena-3d.jpg){ width="640" }
-  <figcaption>경기장 3D 모델 (도면 색은 부분 구별용 — 실제 색은 [소품](#props) 표 참고)</figcaption>
+  <figcaption>경기장 3D 모델 (도면 색은 부분 구별용 — 실제 색은 <a href="#props">소품</a> 표 참고)</figcaption>
 </figure>
 
 ## 1. 경기장 바닥

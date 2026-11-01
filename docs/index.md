@@ -1,6 +1,6 @@
-# Roboin Humanoid Plus Project
+# RH+ Humanoid Project
 
-22-DoF Humanoid and 7-DoF Manipulator, controlled with ROS2
+Roboin Humanoid Plus — 22-DoF Humanoid and 7-DoF Manipulator, controlled with ROS2
 
 ![RH+ 휴머노이드](images/humanoid_home-web.jpg){ .hero }
 
@@ -15,9 +15,9 @@
 
     ---
 
-    - **기본 보행** — 발바닥 센서 없이 모션 재생 / 센서 기반 유동 제어
-    - **승부차기** — 카메라로 공과 골대를 인식해 발로 차기
-    - **물체 이동·투척** — 바닥의 물체를 집어 목표 지점에 놓기
+    - **경기장 미션** — 허들 2개 · 농구 · 축구를 자율 수행 (개발 중)
+    - **보행** — OP3 알고리즘 기반 사인파 보행 (실물 튜닝 중)
+    - **인식** — 머리 카메라 색상 필터링으로 목표물 위치 추정 (개발 중)
 
 -   :material-robot-outline: **7축 로봇팔**
 
@@ -28,6 +28,17 @@
     - **블럭 쌓기** — 카메라로 AprilTag 실린더 3개를 찾아 3층으로 적층
 
 </div>
+
+## 진행 상태
+
+| 영역 | 상태 | 문서 |
+|---|---|---|
+| 하드웨어 인터페이스 | ✅ 24관절 `ros2_control` · Gazebo 연동 | [Hardware Interface](hw/index.md) |
+| 보행 | ⚠️ Gazebo에서 방향 명령 동작, 실물 파라미터 튜닝 중 | [Walking Pattern](walk/index.md) |
+| 카메라 · 인식 | ⚠️ 카메라 구동, 카메라 좌표계 3D 좌표 산출까지 | [High Level Control](vision/index.md) |
+| 미션 수행 | ⬜ 상태 기계 설계 단계 | [Task Generation](task/index.md) |
+| 강화학습 제어 | ⬜ 준비 중 | [RL Control](rl.md) |
+| 7축 로봇팔 | ✅ AprilTag 실린더 3층 적층 | [7-DoF Manipulator](arm/index.md) |
 
 ## 기술 스택
 
@@ -66,7 +77,7 @@
 
 -   **6 ·** [RL Control](rl.md)
 
-    강화학습 기반 제어
+    강화학습 기반 제어 — 준비 중
 
 -   **7 ·** [Task Generation](task/index.md)
 
@@ -78,7 +89,7 @@
 
 -   :material-school: [Learning Path](study/index.md)
 
-    제어 이론 커리큘럼
+    제어 이론 커리큘럼 — 준비 중
 
 </div>
 
