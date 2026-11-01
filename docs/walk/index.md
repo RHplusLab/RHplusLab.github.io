@@ -77,17 +77,6 @@ ros2 topic pub --once /walking/command std_msgs/msg/String "data: 'stop'"
 | 실제 로봇 보행 | ⚠️ 파라미터 튜닝 중 |
 | 센서 피드백 (IMU · 균형 제어) | ⬜ 없음 |
 
-증상별 조정 방향 (실제 로봇 기록 + 패키지 README 튜닝 팁):
-
-| 증상 | 조정 방향 |
-|---|---|
-| 앞으로 넘어짐 | `hip_pitch_offset` ↓ → `x_offset` 더 음수 → `x_move_amplitude` ↓ |
-| 왼쪽으로 휨 | 하드웨어 점검 → `y_offset` 보정 |
-| 옆으로 넘어짐 | `swing_right_left` ↑ → `pelvis_offset` ↑ |
-| 좌우 진동이 큼 (뒤뚱거림) | `pelvis_offset` 과다 여부 확인 |
-| 한 걸음마다 멈칫함 | `dsp_ratio` ↓, `period_time` ↓ |
-| Gazebo에서 맞춘 값이 실제 로봇에서 더 불안정 | — |
-
 - 파라미터별 의미 · 튜닝 순서 → [Sine-Based Walking › 보행 파라미터](sine.md#parameters)
 
 ## 향후 과제

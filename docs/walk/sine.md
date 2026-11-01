@@ -78,7 +78,7 @@ yaw = move.yaw − yaw_offset / 2
 
 ### 닫힌 형태 IK
 
-OP3 `calcInverseKinematicsForLeg`와 같은 순서. 링크 길이만 RH+ 값으로 바꿨다.
+OP3 `calcInverseKinematicsForLeg`와 같은 순서. 링크 길이만 RH+ 값으로 바꾼다.
 
 1. 발목 길이만큼 빼서 고관절 → 발목 중심 벡터 \(\mathbf{p}\) 계산
 2. 발목 roll → 고관절 yaw

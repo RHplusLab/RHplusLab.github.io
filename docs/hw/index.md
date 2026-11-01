@@ -62,10 +62,6 @@
 
 </div>
 
-!!! warning "Bus Servo Controller는 사용 불가"
-    Hiwonder **Bus Servo Controller**는 PC에서 시리얼 포트가 아닌 **HID 장치**(`0483:5750`)로 인식된다.
-    리눅스에서 `/dev/ttyUSB*`로 열 수 없으므로 **TTL/USB Debugging Board**를 쓴다.
-
 ## 패키지
 
 **[`RHp_humanoid_resources`](https://github.com/RHplusLab/RHp_humanoid_resources)** — 로봇 모델 · 하드웨어
@@ -115,7 +111,6 @@
 | **`ros2_control` + 자체 하드웨어 플러그인** | 7축 로봇팔과 같은 구조. 시뮬레이션 전환 쉬움 → **채택** |
 
 - 참고한 공개 사례: PAL Robotics [TALOS](https://github.com/pal-robotics/talos_robot) — `ros2_control` 기반 휴머노이드
-- 상용 휴머노이드가 자체 컨트롤러를 쓰는 이유: 특정 하드웨어 성능 극대화, 범용 프레임워크 오버헤드 제거
 
 ## 학습 순서
 
@@ -133,7 +128,14 @@
     - 예제 9: Gazebo 연동
 
 2. **[Robot Description](description.md)** — CAD → URDF, RViz 확인
-3. **2축 하드웨어 검증** — 예제 6의 플러그인만 교체해 실제 모터 2개 구동
+3. **2축 하드웨어 검증** — 예제 6 xacro에서 플러그인만 교체해 실제 모터 2개 구동
+
+    ```xml
+    <hardware>
+      <plugin><패키지>/<플러그인 클래스></plugin>
+    </hardware>
+    ```
+
 4. **22축 확장** → [Hardware Plugin](interface.md)
 5. **Gazebo 연동** — 같은 URDF에 `GazeboSimSystem` 분기 추가
 

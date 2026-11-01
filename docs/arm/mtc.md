@@ -5,16 +5,7 @@
     - Pick & Place = 손 펴기 → 접근 → 잡기 → 들기 → 이동 → 놓기 → 빠지기
     - 기준 코드: [`fixed_void.cpp`](https://github.com/RHplusLab/RHp_arm_controller/blob/main/rhparm_mtc_pick_and_place/src/fixed_void.cpp)
 
-## 설치 (소스 빌드)
-
-```bash
-mkdir -p ~/ws_moveit2/src && cd ~/ws_moveit2/src
-git clone https://github.com/ros-planning/moveit_task_constructor.git -b humble
-
-cd ~/ws_moveit2
-colcon build --mixin release        # colcon mixin 사전 설정 필요 → Installation 참고
-echo "source ~/ws_moveit2/install/local_setup.bash" >> ~/.bashrc
-```
+설치 → [Installation › MoveIt 2 · MTC](../install/ros2.md#moveit)
 
 ## 1. 단계(stage)의 세 종류
 

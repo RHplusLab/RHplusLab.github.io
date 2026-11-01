@@ -37,7 +37,7 @@
 | 제어 | `ros2_control`, custom `hardware_interface`, MoveIt2 |
 | 작업 계획 | MoveIt Task Constructor (MTC) |
 | 시뮬레이션 | Gazebo, RViz |
-| 인식 | AprilTag, 6D Pose Estimation, Point Cloud |
+| 인식 | AprilTag, HSV 색상 필터링 |
 | 보행 | 사인파 기반 보행 패턴 (OP3 알고리즘 이식) |
 
 ## Documentation
@@ -78,7 +78,7 @@
 
 -   :material-school: [Learning Path](study/index.md)
 
-    제어 이론 커리큘럼과 트러블슈팅 모음
+    제어 이론 커리큘럼
 
 </div>
 

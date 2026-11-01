@@ -156,6 +156,8 @@ ros2 launch rhphumanoid_description rhphumanoid_display.launch.py
 - `joint_state_publisher_gui` 슬라이더로 관절별 **회전 방향 · 원점**을 실물과 비교
 - 방향이 반대인 관절 → 하드웨어 인터페이스의 `invert_factor`로 반전 ([Hardware Plugin § 단위 변환](interface.md#unit-conversion))
 
-!!! warning "KDL: root link has an inertia"
-    루트 링크에 관성이 있으면 나오는 경고.
-    질량 없는 `base_link`를 루트로 두고 `body_link`를 fixed joint로 연결하면 사라진다 (현재 구조).
+## 트러블슈팅
+
+| 증상 | 원인 | 해결 |
+|---|---|---|
+| `KDL: root link has an inertia` 경고 | 루트 링크에 관성(질량)이 있음 | 질량 없는 `base_link`를 루트로 두고 `body_link`를 fixed joint로 연결 (현재 구조) |

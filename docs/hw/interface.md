@@ -34,22 +34,7 @@ serial_servo_bus.cpp       Hiwonder 버스 서보 프로토콜
     `write()`는 명령을 공유 맵에 저장만 한다. 시리얼 전송은 `rhphumanoid::Process()` 스레드가 자기 주기로 처리한다.
     → 시리얼 지연이 제어 루프를 막지 않음.
 
-## 1. 개발 순서: 2축 → 22축
-
-1. `rhparm_hardware_interface` 복사 → `rhptwo_hardware_interface` (2축)
-    - 관절 수 · 이름 변경
-    - 통신 보드 변경 시 프로토콜 확인
-2. `ros2_control_demos` 예제 6 xacro에서 플러그인만 교체 → 실제 모터 2개 구동
-
-    ```xml
-    <hardware>
-      <plugin>rhptwo_hardware/RHPTwoSystemHardware</plugin>
-    </hardware>
-    ```
-
-3. 22축 매핑 추가 → 이름 일괄 변경 `two` → `humanoid` (대소문자 · 파일명 · 폴더명 포함)
-
-## 2. 시리얼 포트 { #serial-port }
+## 1. 시리얼 포트 { #serial-port }
 
 ### CH340 드라이버 (Jetson)
 
@@ -61,15 +46,6 @@ lsmod | grep ch34                                                    # 로드 �
 sudo cp ch34x.ko /lib/modules/$(uname -r)/kernel/drivers/usb/serial/ # 재부팅 후 유지
 sudo depmod -a
 ls -l /dev/ttyUSB*                                                   # 재연결 후 확인
-```
-
-### brltty 제거
-
-- 증상: `dmesg`에 `ch341-uart converter now disconnected from ttyUSB0`
-- 원인: 점자 디스플레이 서비스 `brltty`가 포트 점유
-
-```bash
-sudo apt-get remove brltty
 ```
 
 ### 포트 이름 고정 (udev)
@@ -87,7 +63,7 @@ sudo udevadm control --reload-rules && sudo udevadm trigger
 ls -l /dev/ttyRHP      # /dev/ttyRHP -> ttyUSB0
 ```
 
-## 3. 관절 매핑 · 단위 변환 { #unit-conversion }
+## 2. 관절 매핑 · 단위 변환 { #unit-conversion }
 
 ```cpp
 const JointLimit DEFAULT_LIMIT = {RAD_RANGE, 0, 1000, 500, 1};  // range_rad, min, max, mid, invert
@@ -122,7 +98,7 @@ $$
 - $k$ = `invert_factor` (±1). RViz와 실물 방향이 반대면 −1
 - 1 unit ≈ 0.24° ≈ 0.0042 rad (로그의 `pos= 499, -0.004189`)
 
-## 4. 전송 스레드 상수
+## 3. 전송 스레드 상수
 
 ```cpp
 constexpr auto UPDATE_PERIOD_MOVING = 20ms;
@@ -142,7 +118,7 @@ const std::string SERIAL_DEV = "/dev/ttyRHP";
 | `FIRST_SET_MOVE_TIME` | 2000 ms | 첫 명령의 서보 이동 시간 — 전원 직후 급격한 동작 방지 |
 | `MANUAL_MODE_ENABLE_FILE` | `/tmp/...` | 파일 존재 시 토크 해제 → 손으로 자세 조정. `touch`로 생성 |
 
-## 5. 22축 안정화 포인트
+## 4. 22축 안정화 포인트
 
 ### 위치 읽기는 초기 2초만
 
@@ -189,7 +165,7 @@ readJointPositions(local_pos_map);
 - **서보 전압 제한**: 기본 최대 12 V → Hiwonder 설정 프로그램(Windows)에서 **10~14 V**로 변경
 - **개별 구동 테스트**: 같은 프로그램으로 1~22번을 하나씩 돌려 배선 · ID 문제를 코드 문제와 분리
 
-## 6. 머리 서보 (PWM) { #head-pwm }
+## 5. 머리 서보 (PWM) { #head-pwm }
 
 - 플러그인: `PWMHeadSystemHardware` (몸체와 별도)
 - 방식: Jetson sysfs PWM `/sys/class/pwm/pwmchipN/pwm0`, 주기 20 ms
@@ -232,7 +208,7 @@ sudo udevadm control --reload-rules && sudo udevadm trigger
 
 - 부팅 후 규칙 적용까지 **20~30초** → 그 뒤 bringup 실행
 
-## 7. 컨트롤러 · 명령 전송
+## 6. 컨트롤러 · 명령 전송
 
 ??? example "rhphumanoid_bringup/config/rhphumanoid_controllers.yaml"
 
@@ -279,10 +255,6 @@ goal.trajectory.points.push_back(point);
 client_ptr_->async_send_goal(goal);
 ```
 
-!!! warning "`Joints on incoming trajectory don't match the controller joints.`"
-    `joint_names`가 비었거나 컨트롤러에 없는 이름일 때 발생.
-    관절은 순서가 아닌 **이름**으로 지정한다.
-
 ## 트러블슈팅 { #troubleshooting }
 
 | 증상 | 원인 | 해결 |
@@ -290,6 +262,7 @@ client_ptr_->async_send_goal(goal);
 | `St16invalid_argument ... stod` | `initial_value` 없는 관절에 `stod()` 호출 | 빈 값이면 0.0 사용 (현재 코드 반영) |
 | `failed to initialize` → `Waiting for data on 'robot_description'` 반복 | 플러그인 초기화 실패 | 앞쪽 로그 확인. 패키지 단독 빌드 여부, `on_init` 파라미터명과 xacro 일치 확인 |
 | `'HardwareComponentInterfaceParams' ... does not name a type` | Jazzy 최신 `on_init(params)` 시그니처를 Humble에서 빌드 | Humble: `on_init(const HardwareInfo &)`. Jazzy에서는 이 시그니처가 deprecated 경고만 |
+| `Joints on incoming trajectory don't match the controller joints.` | `joint_names`가 비었거나 컨트롤러에 없는 이름 | 관절은 순서가 아닌 **이름**으로 지정 |
 | `package 'ros2_controllers_test_nodes' not found` | 테스트 노드 미설치 | `sudo apt install ros-humble-ros2-controllers-test-nodes` |
 | 보드가 HID(`0483:5750`)로만 인식 | Bus Servo Controller | TTL/USB Debugging Board(CH340) 사용 |
 | 포트 연결 직후 끊김 | `brltty` | `sudo apt-get remove brltty` |

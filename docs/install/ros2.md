@@ -192,7 +192,6 @@ sudo jetson_clocks          # 클럭 최대 고정 (재부팅하면 해제)
 |---|---|---|
 | 외장 SSD에 Ubuntu 설치 후 GRUB 설치 실패 | 설치 프로그램이 외장 SSD의 EFI가 아니라 **내장 Windows SSD의 EFI**를 `/boot/efi`로 마운트 | 아래 복구 절차 |
 | `ch341-uart converter now disconnected` | `brltty`가 포트 점유 | `sudo apt-get remove brltty` |
-| Windows · Ubuntu 시간이 서로 어긋남 | RTC 해석 차이 | `timedatectl set-local-rtc 1 --adjust-system-clock` |
 
 ??? example "외장 SSD GRUB 복구 (재설치 없이)"
 

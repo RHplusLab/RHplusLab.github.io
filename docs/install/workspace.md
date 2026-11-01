@@ -20,7 +20,7 @@ git clone https://github.com/RHplusLab/RHp_humanoid_controller.git
 
 - 7축 로봇팔은 [`RHp_arm_resources`](https://github.com/RHplusLab/RHp_arm_resources) · [`RHp_arm_controller`](https://github.com/RHplusLab/RHp_arm_controller)를 같은 `src/`에 clone → [7-DoF Manipulator](../arm/index.md)
 
-## 2. 의존성
+## 2. 의존성 { #dependencies }
 
 `package.xml` · launch 파일 기준 목록. [Ubuntu & ROS2](ros2.md)의 패키지를 먼저 설치한다.
 

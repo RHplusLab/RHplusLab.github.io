@@ -118,12 +118,12 @@ grasp_frame_transform.translation().z() = (level >= 2 && angle < 40) ? -0.006 : 
 
 ## 적층 단계 추가
 
-[기본 Pick & Place](mtc.md#2-pick-place)에 아래를 더했다.
+[기본 Pick & Place](mtc.md#2-pick-place)에 아래를 더한다.
 
 | 위치 | 추가 stage / 설정 | 이유 |
 |---|---|---|
 | `place object` 맨 앞 | `descend object` — `MoveRelative(-z, 1~20 cm)` | 위에서 수직으로 내려놓아 아래 실린더를 밀지 않음 |
-| `close hand` | 목표값 `slider_1 = 0.019` | `close`(0)로 조이면 그리퍼 손상 |
+| `close hand` | 목표값 `slider_1 = 0.019` | → [MoveIt2 Basics › 그리퍼](moveit2.md#gripper) |
 | 마지막 층 뒤 | `return home` — `MoveTo("rest")`, sampling planner | 장애물(쌓인 탑)을 피해 복귀 |
 | 층별 작업 | 층마다 Task를 새로 만들고 실패 시 재시도 | 한 Task로 3층을 묶으면 중간 `Connect`에서 해가 잘 안 나옴 |
 

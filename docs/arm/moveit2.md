@@ -105,7 +105,7 @@ controller_manager:
 
 launch 인자 `ros2_control_hardware_type:=real` 하나로 시뮬레이션과 실물이 바뀐다.
 
-## 4. 그리퍼: 각도 ↔ 거리 변환
+## 4. 그리퍼: 각도 ↔ 거리 변환 { #gripper }
 
 - MoveIt은 그리퍼를 **직선 관절**(`slider_1`, 단위 m)로 다룬다.
 - 실제 그리퍼는 **서보 1개의 회전**을 링크 기구로 벌림 폭으로 바꾼다.

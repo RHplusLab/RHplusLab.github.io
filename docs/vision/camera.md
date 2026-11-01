@@ -7,7 +7,7 @@
     - 시뮬레이션은 Gazebo 카메라 센서를 `ros_gz_bridge`로 연결 (토픽 이름이 실물과 다름 → [5절](#gazebo))
     - 소스: [`RHp_humanoid_resources`](https://github.com/RHplusLab/RHp_humanoid_resources) (bringup · description · hardware_interface), [`RHp_humanoid_controller`](https://github.com/RHplusLab/RHp_humanoid_controller) (`rhphumanoid_head_controller`)
 
-## 토픽
+## 토픽 { #topics }
 
 | 토픽 | 발행 노드 | 내용 |
 |---|---|---|
@@ -20,11 +20,7 @@
 
 ## 1. 카메라 노드 (usb_cam)
 
-`usb_cam`은 bringup의 `package.xml` 의존성에 없다 → 따로 설치한다.
-
-```bash
-sudo apt install ros-humble-usb-cam
-```
+설치 → [Workspace Setup › 의존성](../install/workspace.md#dependencies)
 
 ```python
 # rhphumanoid_bringup/launch/rhphumanoid_bringup.launch.py
@@ -177,14 +173,7 @@ bridge = Node(
 )
 ```
 
-!!! warning "실물 · Gazebo 토픽 이름 차이"
-    | | 실물 | Gazebo |
-    |---|---|---|
-    | 원본 영상 | `/image_raw` | `/usb_cam/image_raw` |
-    | 회전 영상 | `/image_flipped/compressed` | 없음 (`image_flipper`는 실물에서만 실행) |
-
-    인식 노드를 양쪽에서 쓰려면 구독 토픽을 파라미터 · remap으로 바꿔야 한다.
-
+- 실물과 토픽 이름이 다름 (→ [토픽](#topics) 표) — 인식 노드를 양쪽에서 쓰려면 구독 토픽을 remap
 - 해상도도 실물(640 × 480)과 다름 → 픽셀 단위 임계값(면적 등)은 해상도에 맞춰 조정
 
 ## 트러블슈팅 { #troubleshooting }
@@ -208,6 +197,4 @@ sudo sysctl -w net.core.wmem_default=2147483647
 ```
 
 - `sysctl -w`는 재부팅하면 초기화 → 유지하려면 같은 값을 `/etc/sysctl.conf`에 등록
-- 영상을 받는 쪽(원격 PC)에도 필요한지는 미확인
 - Docker 개발 환경은 `--net=host`, `--ipc=host`를 주면 네트워크 가상화로 인한 병목은 없음
-- 기록상 버퍼 확대 + fps 낮추기만으로는 끊김이 남았고, 카메라 포맷을 맞춘 뒤 지연이 크게 줄어듦
