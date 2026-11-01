@@ -103,7 +103,6 @@ rhphumanoid_description/
 
 !!! tip
     xacro 작성 전에 **관절 배치도**(링크 1개 · 조인트 1개씩 번호)를 먼저 그려 공유한다.
-    이름 · 번호가 어긋나면 하드웨어 인터페이스까지 수정 범위가 번진다.
 
 ## 5. ros2_control 태그 { #ros2-control-tag }
 

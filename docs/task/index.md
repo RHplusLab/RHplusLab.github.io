@@ -8,23 +8,12 @@
 
 ## 경기장 코스
 
-팀 자체 규정 (기존 대회 규정을 참고해 작성)
-
 ```text
  START → ① 허들 (5 cm) → ② 농구 → ③ 허들 (10 cm) → ④ 축구 → FINISH
 ```
 
-| 미션 | 내용 | 점수 |
-|---|---|---|
-| ① · ③ 허들 | **전진 보행**으로 넘기. 넘어뜨리기 · 옆걸음으로 넘기 · 건너뛰기는 실격 | — |
-| ② 농구 | 공 지지대(높이 3 cm) 위의 공(지름 7 cm 스펀지)을 집어 골대에 넣기. 방법 자유 | 골 +1 / 림 접촉 −1 |
-| ④ 축구 | 공 지지대 위의 공을 드리블해 **하체로** 슛 | 골 +1 / 골대 접촉 · 상체로 공 접촉 −1 |
-
-- 자율 주행, 경기 중 조작 · 접촉 금지, 제한 시간 10분
-- 바닥 유도선(흰색 점선)을 따라 이동, 경로 이탈 시 종료
-- 순위: 미션 점수(−2 ~ +2) → 총 이동 거리 → 시간
 - 축구 후 결승선까지 걸어가기
-- 경기장 규격 · 제작 → [Arena Setup](../arena.md)
+- 경기장 규격 · 소품 · 경기 규칙 → [Arena Setup](../arena.md)
 
 ## 미션 상태 기계 (설계)
 
@@ -60,10 +49,10 @@ flowchart LR
 
 | 미션 | 정렬 대상 · 허용 오차 | 실행 동작 | 성공 판정 |
 |---|---|---|---|
-| ① 허들 (5 cm) | 파란 허들 중심 — 거리 15~20 cm, 좌우 ±2 cm, 각도 ±5° | JUMP | 착지 후 IMU 안정 |
-| ② 농구 | ⓐ 지지대 위 공 — 거리 10~12 cm, ±1 cm<br/>ⓑ 분홍 골대 입구 — 거리 20~25 cm, ±2 cm | PICK UP → PLACE | 비전으로 파지 · 골인 확인 |
-| ③ 허들 (10 cm) | 보라 허들 중심 — ①과 동일 | JUMP HIGH (①보다 큰 힘) | 착지 후 IMU 안정 |
-| ④ 축구 | ⓐ 바닥의 공 — 거리 8~12 cm, ±1 cm<br/>ⓑ 초록 골대 입구 — 각도 ±3° | KICK | 공이 골대 안 |
+| ① 허들 (5 cm) | 허들 1 중심 — 거리 15~20 cm, 좌우 ±2 cm, 각도 ±5° | JUMP | 착지 후 IMU 안정 |
+| ② 농구 | ⓐ 지지대 위 공 — 거리 10~12 cm, ±1 cm<br/>ⓑ 농구 골대 림 — 거리 20~25 cm, ±2 cm | PICK UP → PLACE | 비전으로 파지 · 골인 확인 |
+| ③ 허들 (10 cm) | 허들 2 중심 — ①과 동일 | JUMP HIGH (①보다 큰 힘) | 착지 후 IMU 안정 |
+| ④ 축구 | ⓐ 바닥의 공 — 거리 8~12 cm, ±1 cm<br/>ⓑ 축구 골대 입구 — 각도 ±3° | KICK | 공이 골대 안 |
 
 ### 공통 모듈
 
@@ -133,7 +122,7 @@ flowchart LR
     ```mermaid
     flowchart TD
         Start([Task 1 Start<br/>STATE 0]) --> Nav[Navigate to Waypoint 1<br/>Target: Pre-Hurdle Position<br/>Use Navigation Module]
-        Nav --> Align[Fine Alignment<br/>Target: Blue Hurdle Center<br/>- Distance: 15-20cm<br/>- Center aligned: ±2cm<br/>- Angle: ±5°]
+        Nav --> Align[Fine Alignment<br/>Target: Hurdle 1 Center<br/>- Distance: 15-20cm<br/>- Center aligned: ±2cm<br/>- Angle: ±5°]
         Align --> Execute[Execute Motion: JUMP<br/>- Trigger pre-programmed jump<br/>- Clear 5cm hurdle<br/>- No feedback during execution]
         Execute --> CheckLanding{Landing<br/>Successful?<br/>IMU stable?}
         CheckLanding -->|No: Fall/Unstable| Recover[Recovery Protocol<br/>- Stabilize robot<br/>- Return to Waypoint 1<br/>- Retry count +1]
@@ -165,7 +154,7 @@ flowchart LR
         MaxRetry1 -->|No| Fail([Task Failed])
         MaxRetry1 -->|Yes| Align1
         Check1 -->|Yes: Ball held| SubState[Sub-State: Ball Held<br/>Navigate to Waypoint 3<br/>Target: Pre-Hoop Position]
-        SubState --> Align2[Fine Alignment B<br/>Target: Pink Hoop Opening<br/>- Distance: 20-25cm<br/>- Hoop centered: ±2cm<br/>- Height aligned]
+        SubState --> Align2[Fine Alignment B<br/>Target: Hoop Rim<br/>- Distance: 20-25cm<br/>- Hoop centered: ±2cm<br/>- Height aligned]
         Align2 --> Exec2[Execute Motion: PLACE<br/>- Trigger placement motion<br/>- Move ball to hoop<br/>- Open gripper]
         Exec2 --> Check2{Placement<br/>Successful?<br/>Vision verify}
         Check2 -->|No: Ball missed| Recover2[Recovery Protocol<br/>- Locate ball<br/>- Pick up again<br/>- Retry count +1]
@@ -189,7 +178,7 @@ flowchart LR
     ```mermaid
     flowchart TD
         Start([Task 3 Start<br/>STATE 2]) --> Nav[Navigate to Waypoint 4<br/>Target: Pre-Hurdle Position<br/>Use Navigation Module]
-        Nav --> Align[Fine Alignment<br/>Target: Purple Hurdle Center<br/>- Distance: 15-20cm<br/>- Center aligned: ±2cm<br/>- Angle: ±5°]
+        Nav --> Align[Fine Alignment<br/>Target: Hurdle 2 Center<br/>- Distance: 15-20cm<br/>- Center aligned: ±2cm<br/>- Angle: ±5°]
         Align --> Execute[Execute Motion: JUMP HIGH<br/>- Trigger pre-programmed jump<br/>- Clear 10cm hurdle<br/>- Higher power than Task 1]
         Execute --> CheckLanding{Landing<br/>Successful?<br/>IMU stable?}
         CheckLanding -->|No: Fall/Unstable| Recover[Recovery Protocol<br/>- Stabilize robot<br/>- Return to Waypoint 4<br/>- Retry count +1]
@@ -214,7 +203,7 @@ flowchart LR
     flowchart TD
         Start([Task 4 Start<br/>STATE 3]) --> Nav1[Navigate to Waypoint 5<br/>Target: Pre-Ball Position<br/>Use Navigation Module]
         Nav1 --> Align1[Fine Alignment A<br/>Target: Ball on Ground<br/>- Distance: 8-12cm<br/>- Ball at kick position: ±1cm<br/>- Kicking foot aligned]
-        Align1 --> Align2[Fine Alignment B<br/>Target: Green Goal Opening<br/>- Detect goal center<br/>- Calculate kick angle<br/>- Rotate to goal: ±3°]
+        Align1 --> Align2[Fine Alignment B<br/>Target: Soccer Goal Opening<br/>- Detect goal center<br/>- Calculate kick angle<br/>- Rotate to goal: ±3°]
         Align2 --> Verify{Both targets<br/>aligned?<br/>Ball + Goal}
         Verify -->|No| Align2
         Verify -->|Yes| Execute[Execute Motion: KICK<br/>- Trigger kick motion<br/>- Strike ball toward goal<br/>- Follow through]

@@ -66,7 +66,6 @@ ros2 launch rhparm_mtc_pick_and_place vision_cylinder_stack.launch.py
 
 ## 접근 각도 표 { #approach-angle }
 
-바닥의 낮은 물체는 그리퍼를 기울여 위에서 비스듬히 잡아야 한다.
 **가까운 물체는 세워서, 먼 물체는 눕혀서** 잡는다. 놓는 높이(층)가 높을수록 같은 거리에서도 더 눕혀야 한다.
 
 거리 $d = \sqrt{x^2 + y^2}$ (로봇 원점 기준, m) → 접근 각도 (°)
@@ -122,10 +121,10 @@ grasp_frame_transform.translation().z() = (level >= 2 && angle < 40) ? -0.006 : 
 
 | 위치 | 추가 stage / 설정 | 이유 |
 |---|---|---|
-| `place object` 맨 앞 | `descend object` — `MoveRelative(-z, 1~20 cm)` | 위에서 수직으로 내려놓아 아래 실린더를 밀지 않음 |
+| `place object` 맨 앞 | `descend object` — `MoveRelative(-z, 1~20 cm)` | 물체를 위에서 아래로 내려놓음 |
 | `close hand` | 목표값 `slider_1 = 0.019` | → [MoveIt2 Basics › 그리퍼](moveit2.md#gripper) |
-| 마지막 층 뒤 | `return home` — `MoveTo("rest")`, sampling planner | 장애물(쌓인 탑)을 피해 복귀 |
-| 층별 작업 | 층마다 Task를 새로 만들고 실패 시 재시도 | 한 Task로 3층을 묶으면 중간 `Connect`에서 해가 잘 안 나옴 |
+| 마지막 층 뒤 | `return home` — `MoveTo("rest")`, sampling planner | interpolate planner로는 복귀 중 충돌 |
+| 층별 작업 | 층마다 Task를 새로 만들고 실패 시 재시도 | `Connect` 단계 실패가 많음 |
 
 ## 트러블슈팅
 

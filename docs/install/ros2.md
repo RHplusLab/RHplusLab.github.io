@@ -127,7 +127,6 @@ colcon build --mixin release
 | 4 | 설치 중 사용자 계정 생성 |
 
 - JetPack 6 = Ubuntu 22.04 기반 → ROS 2 Humble을 [2절](#ros2)과 같은 방법으로 설치
-- Jetson의 영상 출력은 DisplayPort → 모니터 없이 진행하려면 아래 원격 접속 사용
 
 ### 원격 접속
 
@@ -209,4 +208,3 @@ sudo jetson_clocks          # 클럭 최대 고정 (재부팅하면 해제)
     ```
 
     - 재부팅 → 노트북 UEFI 부팅 메뉴에서 외장 SSD(`UEFI: <SSD 이름>`) 선택
-    - `--removable`: 펌웨어 기본 경로에 설치, `--no-nvram`: 내장 디스크의 부팅 항목을 건드리지 않음

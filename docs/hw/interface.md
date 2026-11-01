@@ -32,7 +32,6 @@ serial_servo_bus.cpp       Hiwonder 버스 서보 프로토콜
 
 !!! note "write()는 저장만, 전송은 별도 스레드"
     `write()`는 명령을 공유 맵에 저장만 한다. 시리얼 전송은 `rhphumanoid::Process()` 스레드가 자기 주기로 처리한다.
-    → 시리얼 지연이 제어 루프를 막지 않음.
 
 ## 1. 시리얼 포트 { #serial-port }
 
@@ -113,9 +112,9 @@ const std::string SERIAL_DEV = "/dev/ttyRHP";
 | 상수 | 값 | 의미 |
 |---|---|---|
 | `UPDATE_PERIOD_MOVING` | 20 ms (50 Hz) | 명령 수신 중 전송 주기. controller_manager `update_rate`와 일치 |
-| `UPDATE_PERIOD_IDLE` | 100 ms (10 Hz) | 명령 없을 때 주기 — 버스 점유 · CPU 부하 감소 |
+| `UPDATE_PERIOD_IDLE` | 100 ms (10 Hz) | 명령 없을 때 전송 주기 |
 | `IDLE_ENTRY_CNT` | 50 | 명령 없이 50주기 경과 시 idle 진입 |
-| `FIRST_SET_MOVE_TIME` | 2000 ms | 첫 명령의 서보 이동 시간 — 전원 직후 급격한 동작 방지 |
+| `FIRST_SET_MOVE_TIME` | 2000 ms | 첫 명령의 서보 이동 시간 |
 | `MANUAL_MODE_ENABLE_FILE` | `/tmp/...` | 파일 존재 시 토크 해제 → 손으로 자세 조정. `touch`로 생성 |
 
 ## 4. 22축 안정화 포인트
@@ -127,8 +126,8 @@ const std::string SERIAL_DEV = "/dev/ttyRHP";
 | 위치 읽기 | 정지할 때마다 전 관절 | **활성화 후 2초만** (초기 자세 + 연결 확인) |
 | `/joint_states` 값 | 서보 실측값 | **마지막 명령값** (오픈 루프) |
 
-- 22축에서 주기적 읽기 → 명령 전송 지연, 제어 불능 발생
-- 읽기 제거 후 해결
+- 22축에서 주기적으로 읽으면 reading loop가 돌지 않고 제어도 되지 않음
+- 읽기는 활성화 직후에만 하고, 이후 `/joint_states`는 마지막 명령값으로 대체
 
 ### 초기 자세 튐 (race condition)
 
@@ -150,8 +149,7 @@ readJointPositions(local_pos_map);
 
 ### 끊긴 모터 감지
 
-- 초기 읽기에 응답 없는 모터 → ID 출력 후 **초기화 중단**
-- 한 관절만 빠진 채 구동하면 낙상 · 기구 손상 위험
+- 초기 읽기에 응답 없는 모터 → ID 출력 후 **초기화 중단** (손상 방지)
 
 ```text
 [FATAL]: !!! MOTOR COMMUNICATION FAILURE DETECTED !!!
@@ -169,7 +167,7 @@ readJointPositions(local_pos_map);
 
 - 플러그인: `PWMHeadSystemHardware` (몸체와 별도)
 - 방식: Jetson sysfs PWM `/sys/class/pwm/pwmchipN/pwm0`, 주기 20 ms
-- `pwmchip` 번호는 Jetson 모델마다 다름 → `ls /sys/class/pwm` 확인, `jetson-io`로 PWM 핀 활성화
+- `pwmchip` 번호는 환경마다 다를 수 있음 → `ls /sys/class/pwm` 확인, `jetson-io`로 PWM 핀 활성화
 
 ```xml
 <ros2_control name="head_hardware" type="system">
@@ -238,7 +236,7 @@ sudo udevadm control --reload-rules && sudo udevadm trigger
 [`joint_trajectory_controller`](https://control.ros.org/humble/doc/ros2_controllers/joint_trajectory_controller/doc/userdoc.html)
 
 - 입력: "어떤 관절을 · 언제(`time_from_start`) · 어느 위치로"가 적힌 궤적
-- 동작: 시간표대로 하드웨어에 보간 명령 전달 → 미리 계산된 보행 시퀀스 재생에 적합
+- 동작: 시간표대로 하드웨어에 보간 명령 전달
 
 | 입력 | 이름 | 용도 |
 |---|---|---|

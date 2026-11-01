@@ -40,7 +40,7 @@
 | 메인 컴퓨터 | NVIDIA Jetson Orin Nano | Ubuntu 22.04 + ROS2 Humble |
 | 몸체 관절 | Hiwonder HTD-45H 버스 서보 × 22 | 다리 12 · 팔 10 (그리퍼 포함). 0~1000 단위 / 240° |
 | 서보 통신 보드 | Hiwonder TTL/USB Debugging Board | CH340, 115200 bps. 출력 2포트 → 만능기판으로 분배 |
-| 머리 관절 | SG-90 PWM 서보 × 2 | pan / tilt. 레벨 컨버터 경유, 전원은 모터 보드 5V (GND 공유) |
+| 머리 관절 | SG-90 PWM 서보 × 2 | pan / tilt. 레벨 컨버터 경유, 외부 5V 전원 · GND 공통 접지 |
 | 안전 | 전원 스위치 | 비상정지 · 토크 해제용 |
 
 <div class="photo-row photo-row--portrait-last" markdown>
@@ -103,13 +103,9 @@
 | 컨트롤러 스폰 | `ros2_control_node` 시작 직후 | 5초 지연 |
 | 카메라 | `usb_cam` 노드 | `ros_gz_bridge` |
 
-## ros2_control을 쓰는 이유
+## ros2_control 선택
 
-| 선택지 | 판단 |
-|---|---|
-| OP3 `robotis_framework`를 Hiwonder 모터용으로 수정 | 프레임워크가 다이나믹셀에 묶여 있어 수정 범위가 큼 |
-| **`ros2_control` + 자체 하드웨어 플러그인** | 7축 로봇팔과 같은 구조. 시뮬레이션 전환 쉬움 → **채택** |
-
+- OP3는 `ros2_control` 대신 자체 `robotis_framework`를 사용 → RH+는 OP3 하드웨어 계층 대신 **`ros2_control` + 자체 하드웨어 플러그인** 사용
 - 참고한 공개 사례: PAL Robotics [TALOS](https://github.com/pal-robotics/talos_robot) — `ros2_control` 기반 휴머노이드
 
 ## 학습 순서
@@ -124,7 +120,7 @@
     ros2 launch ros2_control_demo_example_6 test_forward_position_controller.launch.py   # 새 터미널
     ```
 
-    - 예제 6: 관절마다 액추에이터가 따로 있는 구조 → 우리 로봇과 같음
+    - 예제 6: `rrbot_modular_actuators`
     - 예제 9: Gazebo 연동
 
 2. **[Robot Description](description.md)** — CAD → URDF, RViz 확인

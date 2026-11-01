@@ -116,7 +116,6 @@ wrapper->setMaxIKSolutions(8);
 wrapper->setIKFrame(grasp_frame_transform, "gripper_base");
 ```
 
-- 기울기(y축 회전)가 없으면 그리퍼가 항상 수평으로만 접근한다. 바닥의 낮은 물체는 **위에서 비스듬히** 잡아야 해가 나온다.
 - 기울기는 물체까지의 거리에 따라 달라진다 → [Pick & Place § 접근 각도](pick-place.md#approach-angle)
 
 ### 계획 · 실행
@@ -151,9 +150,8 @@ RViz에는 **Motion Planning Tasks** 패널을 추가한다 (`mtc.rviz`에 저�
 | 증상 | 원인 | 해결 |
 |---|---|---|
 | `allow collision (hand,object)`에서 해 없음 | 물체가 바닥(`base_link` 판)과 붙어 있어 충돌로 판정 | 물체를 바닥에서 1 mm 띄우거나 `allowCollisions`에 `base_link` 추가 |
-| 물체 여러 개일 때 `generate grasp pose`부터 실패 | 모든 물체의 `id`가 같음 | `object1`, `object2`… 고유 id 부여 |
-| 실린더 높이를 줄이니 실패 | 그리퍼가 바닥 판과 충돌 | 실린더 높이 2 cm → **3 cm** |
-| `Connect`(move to place)에서 해가 잘 안 나옴 | 샘플링 기반이라 실행마다 결과가 다름 | `plan()` 실패 시 1초 쉬고 재시도 (`vision_cylinder_stack`은 **최대 10회**), `MoveRelative` 최소 거리 3 → 5 mm |
+| 실린더 높이 2 cm에서 충돌 | — | 실린더 높이 2 cm → **3 cm** |
+| `Connect`(move to place)에서 해가 잘 안 나옴 | 원인 미확인 | `plan()` 실패 시 1초 쉬고 재시도 (`vision_cylinder_stack`은 **최대 10회**), `MoveRelative` 최소 거리 3 → 5 mm |
 | 3층 쌓기에서 경로가 2층 실린더를 관통 | 놓인 실린더를 장애물로 등록하지 않음 | 쌓인 실린더를 충돌 객체로 추가 |
-| 원위치 복귀에서 충돌 | `JointInterpolationPlanner`는 장애물을 보지 않음 | 복귀(`return home`)는 `PipelinePlanner`(sampling) 사용 |
+| 원위치 복귀에서 충돌 | 복귀를 interpolate planner로 계획 | 복귀(`return home`)는 `PipelinePlanner`(sampling) 사용 |
 | `MoveRelative`가 원하는 만큼 못 감 | `setMinMaxDistance`의 최소값을 만족 못 함 | 최소 거리를 줄이거나 방향 벡터 확인 |
